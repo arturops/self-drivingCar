@@ -1,5 +1,5 @@
 # **Finding Lane Lines and Lanes on the Road** 
-This repository contains code that aims to detect the lane a car is driving in. It uses OpenCV 3 (term `cv2` to refer to it here) and Python 3.
+This repository contains [code](./P1.ipynb) that aims to detect the lane a car is driving in. It uses OpenCV 3 (term `cv2` to refer to it here) and Python 3.
 
 [//]: # (Image References)
 [imageStartEnd]: ./Description_Images/StartEnd.png "StartEnd"
