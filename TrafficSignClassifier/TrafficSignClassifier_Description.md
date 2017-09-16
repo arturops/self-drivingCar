@@ -1,14 +1,14 @@
-#**Traffic Sign Recognition** 
-
-##Writeup Template
-
-###You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
+#**Traffic Sign Recognition using Deep Learning** 
 
 ---
 
-**Build a Traffic Sign Recognition Project**
+This project contains several auxiliar functions to manipulate, analyze, display and augment data. All of these are useful to understand what you initially have, create new data for your model (if needed) and visualize that new data or analyze your whole data.
 
-The goals / steps of this project are the following:
+In addition, there is a base class for a Convolutional Neural Network (CNN) that can be used as a guideline when designing new CNN's. Also, there are wrapper functions for a more simplistic design of a new model.
+
+##Approach to Build a Traffic Sign Recognition Neural Network
+
+The steps of this project are the following:
 * Load the data set (see below for links to the project data set)
 * Explore, summarize and visualize the data set
 * Design, train and test a model architecture
