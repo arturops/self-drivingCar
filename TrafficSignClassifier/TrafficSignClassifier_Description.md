@@ -191,7 +191,7 @@ normalized_image = (image - mean_pixels)/standard_dev_pixels
 
 The reason behind normalization is that it helps the model converge better to the global minima and as such it will generalize better.
 
-**NOTE:**I decided not to use grayscale as I couldn't see any improvement when used.
+ **NOTE:** I decided not to use grayscale as I couldn't see any improvement when used.
 
 #### 3.2. Model Design
 
