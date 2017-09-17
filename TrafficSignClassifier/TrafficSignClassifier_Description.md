@@ -1,4 +1,4 @@
-#**Traffic Sign Recognition using Deep Learning** 
+# **Traffic Sign Recognition using Deep Learning** 
 
 ---
 
@@ -40,6 +40,7 @@
 
 [e]: ./Description_Images/ "Example"
 
+The project's goal is to create a CNN model capable of classifying traffic signs with an accuracy of 94% in the validation set. You can find a notebook with the code [here](./Traffic_Sign_Classifier.ipynb).
 
 This project contains several auxiliar functions to manipulate, analyze, display and augment data. All of these are useful to understand what you initially have, create new data for your model (if needed) and visualize that new data or analyze your whole data.
 
@@ -47,8 +48,8 @@ In addition, there is a base class for a Convolutional Neural Network (CNN) that
 
 ![alt text][SampleTrafficSign]
 
----
-##Approach to Build a Traffic Sign Recognition Neural Network
+
+## Approach to Build a Traffic Sign Recognition Neural Network
 
 The steps of this project are the following:
 
@@ -60,19 +61,17 @@ The steps of this project are the following:
 
 All of the steps above can be found in a [Jupyter Notebook](./Traffic_Sign_Classifier.ipynb) that shows in detail their implementation.
 
-The goal of the project is to achieve 0.93 at least in the validation accuracy.
-
 **NOTE:** Some of the implementations here were done from recommendations of [Udacity](https://review.udacity.com/#!/rubrics/481/view).  
 
 ---
-##1. Load Data Set
+## 1. Load Data Set
 
 The data used is the [German Traffic Sign data set](http://benchmark.ini.rub.de/?section=gtsrb&subsection=dataset) and it has been widely used to train networks in traffic signs recognition.   
 
 ---
-##2. Data Set Exploration, Summary, Visualization and Conclusions
+## 2. Data Set Exploration, Summary, Visualization and Conclusions
 
-###2.1. Data Exploration
+### 2.1. Data Exploration
 
 Using the pandas library for a quick overview of the traffic signs data set, one can realize insightful information of the data.
 
@@ -134,7 +133,7 @@ For a summary of the 43 classes in the dataset, one can look at the [Sign Names 
 |   41   | End of no passing                                  |
 |   42   | End of no passing by vehicles over 3.5 metric tons |
 
-###2.2. Data Summary
+### 2.2. Data Summary
 
 After more data exploration using pandas to calculate summary statistics, one can notice:
 
@@ -147,7 +146,7 @@ Thus, one can make more conclusions:
 * Clearly one can tell that most of the dataset(around 50%) is devoted to images with labels 0 to 12
 * The mean of the labels is 15.7. This implies most of the data's labels are smaller than or equal to 15 as the labels range (min = 0 and max = 42) is almost 3 times the mean (i.e. 15)
 
-###2.3. Data Visualization
+### 2.3. Data Visualization
 
 As a confirmation of the exploration and summary above it is good practice to plot the data and the desired method was a bar chart that displays the frequency fo each sample image in the dataset.
 
@@ -157,16 +156,16 @@ After understanding the number of the data, one would like to see the actual dat
 
 ![alt text][DataCollage]
 
-###2.4. Data Conclusions
+### 2.4. Data Conclusions
 
 From the statistics above and the visualization one can right away believe the data set is very small for a neural network to fully train on it and generalize well. Data Augmentation is a technique that allows to create new images based on the existing ones. It consists on rotating, translating, cropping, flipping, chaging contrast/brightness, etc on an existing image, so that it seems it is seeing from different perspective/conditions that can be beneficial for the CNN to learn. It is also very important to perform such changes to the image using an Affine transformation so the original image doesn't get (statistically) distorted.
 In this project, rotation, translations, zooming and shearing techniques were used.
 
 An example of such data augmentation is shown below
-#####Original Images
+##### Original Images
 ![alt text][RandomImages]
 
-#####Augmented Images
+##### Augmented Images
 ![alt text][AugmentedImages]
 
 After applying augmentation the dataset increase 3 times is size for training and allows the CNN to generalize better. The training data set size was 139196 sample images.
@@ -176,9 +175,9 @@ One can see that in the histogram below
 ![alt text][DataHisto2]
 
 ---
-##3. Design and Test a Model Architecture
+## 3. Design and Test a Model Architecture
 
-####3.1. Data Preparation 
+#### 3.1. Data Preparation 
 
 After analyzing the data set, we concluded that it was rather small to properly train a CNN. Thus, the whole train data set was augmented using data augmentation techiques as an early first step in data preparation.
 
@@ -194,7 +193,7 @@ The reason behind normalization is that it helps the model converge better to th
 
 **NOTE:**I decided not to use grayscale as I couldn't see any improvement when used.
 
-####3.2. Model Design
+#### 3.2. Model Design
 
 Before starting the module, I decided to create wrapper functions:
 
@@ -255,20 +254,20 @@ A more detailed description is in the table below
 | Softmax           |                                                    |
 
 
-####3.3. Model Training Parameters Description 
+#### 3.3. Model Training Parameters Description 
 
 Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
 To train the model, I used:
 
 * Adam Optimzer, as it has an embbeded momentum that gets faster to minima
-* Learning rate of 0.0005
+* Learning rate of 0.001
 * Batch size of 128 images
 * 80 epochs
-* Dropout of 0.4
+* Dropout of 0.5
 
 
-####3.4. Model Training Procedure
+#### 3.4. Model Training Procedure
 
 Recalling that the goal of the project is to achieve 0.93 at least in the validation accuracy. I decided to start with what I was familiar and then move to learn new CNN's.
 
@@ -287,14 +286,14 @@ At some point I realized I could keep experimenting forever, so I decide to stic
 
 My final model results were:
 
-* Training set accuracy of ?
-* Validation set accuracy of ? 
-* Test set accuracy of ?
+* Training set accuracy of 0.999
+* Validation set accuracy of 0.955 
+* Test set accuracy of 0.954
 
 ---
-##4. Test a Model on New Images
+## 4. Test a Model on New Images
 
-####4.1. Web Images
+#### 4.1. Web Images
 
 I chose 72 German traffic signs found on the web and used them to test the generalization of the model. I had to preprocess the images using Mac OS X Preview. I cropped and resized images to be 32x32, so that the model could process them. Out of those 72 images:
 
@@ -315,27 +314,32 @@ However, there will also be images that have a hard degree of detection, but the
 ![alt text][Image7] ![alt text][Image8] ![alt text][Image9] ![alt text][Image10] ![alt text][Image11] ![alt text][Image12] ![alt text][Image13] ![alt text][Image14] ![alt text][Image15]    
 
 
-####4.2. Web Images Accuracy
+#### 4.2. Web Images Accuracy
 
 **The 29 real world conditions web images**
-The model was able to correctly guess 16 of the 29 traffic signs, which gives an accuracy of 65%. This result is very reasonable as the images it couldn't guess have very different points of view or more artifacts than the ones in the training,validation and test datasets. 
+The model was able to correctly guess 20 of the 29 traffic signs, which gives an accuracy of 71%. This result is very reasonable as the images it couldn't guess have very different points of view or more artifacts than the ones in the training,validation and test datasets. 
 
 **The other 43 web images**
-The model was able to correctly guess 36 of the 43 traffic signs, which gives an accuracy of 85%. This result is amazing as this images are similar but not the same as the ones in the training,validation and test datasets. 
+The model was able to correctly guess 36 of the 40 traffic signs, which gives an accuracy of 95%. This result is amazing as this images are similar but not the same as the ones in the training,validation and test datasets. 
 
 These results verify that the network model is training well and that more data from different points of view or a more complex data augmentation can definitively improve how the model generalizes.
 
 
-####4.3. Softmax Probabilities of Web Images
+#### 4.3. Softmax Probabilities of Web Images
 
 In order to display some of the performance in the images chosen from the web that are more similar to the real world, I added some of the softmax examples from the notebook in here
 
-![alt text] [Softmax1]
-![alt text] [Softmax2]
-![alt text] [Softmax3]
-![alt text] [Softmax4]
-![alt text] [Softmax5]
-![alt text] [Softmax6]
+![alt text][Softmax1] 
+
+![alt text][Softmax2]
+
+![alt text][Softmax3] 
+
+![alt text][Softmax4]
+
+![alt text][Softmax5] 
+
+![alt text][Softmax6]
 
 After looking at the examples it is very clear that for images that are similar to the train data the network had almost no issue predicting it correct most of the time, while for images that are very far or where illumination is partial the model is not quite accurate as it has not been trained on images of such type or with such artifacts. 
 
