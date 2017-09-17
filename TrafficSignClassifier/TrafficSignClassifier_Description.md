@@ -61,7 +61,7 @@ The steps of this project are the following:
 
 All of the steps above can be found in a [Jupyter Notebook](./Traffic_Sign_Classifier.ipynb) that shows in detail their implementation.
 
-**NOTE:** Some of the implementations here were done from recommendations of [Udacity](https://review.udacity.com/#!/rubrics/481/view).  
+ **NOTE:** Some of the implementations here were done from recommendations of [Udacity](https://review.udacity.com/#!/rubrics/481/view).  
 
 ---
 ## 1. Load Data Set
