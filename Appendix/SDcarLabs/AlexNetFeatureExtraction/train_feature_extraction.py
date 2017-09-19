@@ -6,7 +6,7 @@ from sklearn.utils import shuffle
 import time
 
 num_classes = 43
-epochs = 3
+epochs = 10
 batch_size = 128
 learn_rate = 1e-3
 
@@ -34,7 +34,7 @@ fc7 = tf.stop_gradient(fc7)
 
 # TODO: Add the final layer for traffic sign classification.
 fc8Shape = (fc7.get_shape().as_list()[-1],num_classes)
-fc8W = tf.Variable(tf.truncated_normal(fc8Shape),name='fc8Weights')
+fc8W = tf.Variable(tf.truncated_normal(fc8Shape,stddev=1e-2),name='fc8Weights')
 fc8b = tf.Variable(tf.zeros(num_classes),name='fc8bias')
 logits = tf.matmul(fc7,fc8W) + fc8b
 
@@ -84,6 +84,7 @@ print('Dataset current samples used: {}'.format(y_train.shape[0]))
 
 with tf.Session() as sess:
 	sess.run(init_var)
+	total_time = 0;
 	print(' Start training on {} samples ...'.format(y_train.shape[0]))
 	for epoch in range(epochs):
 
@@ -99,7 +100,10 @@ with tf.Session() as sess:
 
 		# check accuracy after every epoch
 		val_accuracy = evaluate(x_validation[0:val_limit], y_validation[0:val_limit], sess)
-		print('Epoch {}/{} ... Validation Accuracy {:.4f} ... Ellapsed time {} ...'.\
+		print('Epoch {}/{} ... Validation Accuracy {:.4f} ... Ellapsed time {:.4f} ...'.\
 				format(epoch+1,epochs,val_accuracy,time.time()-t_start))
+		total_time+=time.time()-t_start
+	print('Total Training time {:.4f} s'.format(total_time))
+
 
 
