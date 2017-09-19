@@ -1,6 +1,9 @@
 import pickle
 import tensorflow as tf
 # TODO: import Keras layers you need here
+import numpy as np
+from keras.layers import Input, Flatten, Dense
+from keras.model import Model
 
 flags = tf.app.flags
 FLAGS = flags.FLAGS
