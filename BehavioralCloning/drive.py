@@ -16,6 +16,12 @@ from keras.models import load_model
 import h5py
 from keras import __version__ as keras_version
 
+# My image toolkit
+import imgTools
+MAX_SPEED = 25
+MIN_SPEED = 10
+speed_limit = MAX_SPEED
+
 sio = socketio.Server()
 app = Flask(__name__)
 model = None
@@ -61,9 +67,25 @@ def telemetry(sid, data):
         imgString = data["image"]
         image = Image.open(BytesIO(base64.b64decode(imgString)))
         image_array = np.asarray(image)
+
+        #added preprocessdata for my model
+        image_array = imgTools.preprocess(image_array)
+        #image = np.array([image])
+
         steering_angle = float(model.predict(image_array[None, :, :, :], batch_size=1))
 
-        throttle = controller.update(float(speed))
+        #Added speed limit
+        global speed_limit
+        speed = float(speed)
+        if speed > speed_limit:
+            speed_limit = MIN_SPEED
+        else:
+            speed_limit = MAX_SPEED
+
+        #throttle = controller.update(float(speed)) #original
+        
+        #throttle = controller.update((speed/speed_limit)**2)
+        throttle = 1.0 - steering_angle**2 - (speed/speed_limit)**2
 
         print(steering_angle, throttle)
         send_control(steering_angle, throttle)
