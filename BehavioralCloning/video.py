@@ -1,6 +1,13 @@
+
+# This can be called in case you have import errors
+import imageio
+def download_ffmpeg():
+    imageio.plugins.ffmpeg.download()
+
+
+
 from moviepy.editor import ImageSequenceClip
 import argparse
-
 
 def main():
     parser = argparse.ArgumentParser(description='Create driving video.')
@@ -24,4 +31,5 @@ def main():
 
 
 if __name__ == '__main__':
+    #download_ffmpeg()
     main()
