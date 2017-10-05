@@ -186,8 +186,8 @@ def augment(data_dir, center, left, right, steering_angle, range_x=100, range_y=
 	Augments images and adjust steering angles 
 	"""
 	image, steering_angle = choose_image(data_dir, center, left, right, steering_angle)
-	image = crop(image)
-	image = resize(image)
+	#image = crop(image)
+	#image = resize(image)
 	image, steering_angle = random_flip(image, steering_angle)
 	image, steering_angle = random_translate(image, steering_angle, range_x, range_y)
 	image = random_shadow(image)
@@ -207,11 +207,14 @@ def batch_generator(data_dir, image_paths, steering_angles, batch_size, is_train
 			steering_angle = steering_angles[index]
 			# augmentation 
 			if is_training and np.random.rand() < 0.6:
-				image, steering_angle = augment(data_dir, center, left, right, steering_angle,80,80)
+				image, steering_angle = augment(data_dir, center, left, right, steering_angle)
+				#image = rgb2yuv(image)
 			else:
 				image = load_image(data_dir, center)
+				#image = preprocess(image)#fix
 			# preprocess image and then add to batch
-			images[i] = rgb2yuv(image) #augment() crops and resizes images before actual augmentation  #preprocess(image)
+			images[i] = preprocess(image)
+			#images[i] = image #augment() crops and resizes images before actual augmentation 
 			steers[i] = steering_angle
 			i+=1
 			if i == batch_size:
