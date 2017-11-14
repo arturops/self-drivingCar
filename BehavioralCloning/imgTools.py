@@ -1,4 +1,5 @@
 # Tools to augment images and generate batches with a generator
+# These tools were inspired by Siraj Raval
 
 import cv2
 import os
